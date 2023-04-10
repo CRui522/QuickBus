@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bus_list_prompt">选择公交车</string>
+    <string-array name="bus_routes">
+        <item>101路</item>
+        <item>102路</item>
+        <item>103路</item>
+        <item>104路</item>
+        <item>105路</item>
+        <item>106路</item>
+    </string-array>
+</resources>

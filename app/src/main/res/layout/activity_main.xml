@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 搜索框 -->
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/search_background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="5dp"
+        android:paddingStart="5dp"
+        android:gravity="start|center_vertical"
+        android:text="搜索公交线路、站点"
+        android:textColor="#666666"
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry" />
+
+    <!-- 附近路线标题 -->
+    <TextView
+        android:id="@+id/nearbyRoutesTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:text="附近路线"
+        android:textColor="#333333"
+        android:textSize="18sp" />
+
+    <!-- 路线列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/nearbyRoutesTitleTextView"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
+
+

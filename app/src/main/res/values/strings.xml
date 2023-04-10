@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">QuickBus</string>
+    <string name="hint_city">Input City Name</string>
+    <string name="btn_search">Search</string>
+</resources>
