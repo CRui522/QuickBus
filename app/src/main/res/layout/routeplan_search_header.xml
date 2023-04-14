@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/search_header_bg_0">
+
+    <View
+        android:id="@+id/devided_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/action_bar_devided_line" />
+
+    <RelativeLayout
+        android:id="@+id/search_header"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/shape_rect_round_header_bg">
+
+        <FrameLayout
+            android:id="@+id/icon_tips"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="75dp"
+            android:paddingLeft="21.5dp"
+            android:paddingRight="12dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/route_search_input_start_text"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_gravity="top"
+                android:background="@null"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"
+                android:hint="输入起点"
+                android:includeFontPadding="false"
+                android:paddingLeft="20dp"
+                android:singleLine="true"
+                android:tag="voiceTag_startNode"
+                android:textColor="@color/white"
+                android:textColorHint="#999"
+                android:textSize="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/route_search_input_point" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="38dp"
+                android:background="#4B4F6C" />
+
+            <AutoCompleteTextView
+                android:id="@+id/route_search_input_end_text"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_gravity="bottom"
+                android:background="@null"
+                android:ellipsize="end"
+                android:gravity="left|center_vertical"
+                android:hint="输入终点"
+                android:includeFontPadding="false"
+                android:paddingLeft="20dp"
+                android:singleLine="true"
+                android:tag="voiceTag_endNode"
+                android:textColor="@color/white"
+                android:textColorHint="#999"
+                android:textSize="16dp" />
+
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btn_search"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/shape_rect_round_search"
+            android:onClick="searchButtonProcess"
+            android:text="搜索"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+    <!--    <CheckBox
+                android:id="@+id/riding_type_chose"
+                android:layout_width="match_parent"
+                android:layout_height="16dp"
+                android:layout_below="@id/search_header"
+                android:layout_marginStart="18dp"
+                android:layout_marginEnd="18dp"
+                android:layout_marginBottom="16dp"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:text="@string/biking_route_plan_type_instruction"
+                android:visibility="gone"/>-->
+
+</RelativeLayout>

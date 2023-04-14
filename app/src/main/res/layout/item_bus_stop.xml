@@ -6,6 +6,9 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -31,8 +34,8 @@
                 android:textSize="18sp" />
 
             <View
-                android:layout_width="1dp"
-                android:layout_height="12dp"
+                android:layout_width="12dp"
+                android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
@@ -47,20 +50,30 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/sub_item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bus_station"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <LinearLayout
             android:id="@+id/routes_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/bus_station">
+            android:layout_below="@id/sub_item_list"
+            android:gravity="bottom|right"
+            android:orientation="horizontal"
+            tools:ignore="RtlHardcoded,UseCompoundDrawables">
 
             <TextView
                 android:id="@+id/parent_name_text_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 android:layout_marginEnd="10dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textSize="12sp"
+                android:visibility="visible" />
 
             <ImageView
                 android:id="@+id/parent_arrow_image_view"
@@ -68,15 +81,9 @@
                 android:layout_height="24dp"
                 android:layout_gravity="right|bottom"
                 android:src="@drawable/ic_arrow_down"
+                android:contentDescription="@string/expand_or_close"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/sub_item_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/routes_view"
-            android:orientation="vertical"
-            android:visibility="gone"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

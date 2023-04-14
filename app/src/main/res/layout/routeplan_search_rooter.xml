@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rooter_search"
+    android:layout_width="match_parent"
+    android:layout_height="140dp"
+    android:background="@drawable/shape_rect_round_bottom_card"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/eta_text"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginEnd="22dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginEnd="11dp"
+        android:background="@color/common_title_bar_divider_line" />
+
+    <Button
+        android:id="@+id/route_detail_button"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="17dp"
+        android:background="@drawable/shape_rect_round_detail"
+        android:text="详情"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+
+</LinearLayout>

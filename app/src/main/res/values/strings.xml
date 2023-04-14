@@ -2,4 +2,15 @@
     <string name="app_name">QuickBus</string>
     <string name="hint_city">Input City Name</string>
     <string name="btn_search">Search</string>
+    <string name="expand_or_close">expand or close</string>
+    <string name="demo_name_transit_route_plan">公交路线规划</string>
+    <string name="demo_name_route_plan_detail">路线规则详细</string>
+    <string name="nearby">附近车站</string>
+    <string name="person">个人</string>
+    <string name="about">关于</string>
+    <string name="registertext">还没有账号？点击立即注册</string>
+    <string name="info_text">App引入BaiduMap SDK来实现一些主要功能，如地图显示，路线规划，公交信息等。在开发过程中，我借助了ChatGpt来帮助我实现一些功能和设计方案，这里不得感叹一下AI的发展速度，在做毕设的这些天，每天都能看到各种新型的AI技术和产品，可以说AI已经站在了风口浪尖。我对AI的最大感触就是信息的整合和理解，真的大大提高了效率，它可以用于生活，用于工作，用于方方面面。同时也感到了深深的无力，AI无法完全取代人类，但能真的淘汰很多人。。。</string>
+    <string name="developed_by_my">我的毕业设计</string>
+    <string name="source"><a href="https://github.com/CRui522/QuickBus">QuickBus</a> by Rui</string>
+    <string name="version">Version 1.0</string>
 </resources>
