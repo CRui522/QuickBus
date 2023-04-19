@@ -26,6 +26,7 @@ import com.baidu.mapapi.map.MapPoi;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.RouteLine;
@@ -56,14 +57,12 @@ public class TransitRoutePlanActivity extends AppCompatActivity
         implements BaiduMap.OnMapClickListener,
         OnGetRoutePlanResultListener, View.OnClickListener {
 
+    public LatLng location;
     public MyLocationData locData;
     private RouteLine mRouteLine = null;
     private BroadcastReceiver mLocationDataReceiver;
-    // 地图相关，使用继承MapView的MyRouteMapView目的是重写touch事件实现泡泡处理
-    // 如果不处理touch事件，则无需继承，直接使用MapView即可
     private MapView mMapView = null;    // 地图View
     private BaiduMap mBaidumap = null;
-    // 搜索相关
     private RoutePlanSearch mSearch = null;    // 搜索模块，也可去掉地图模块独立使用
     private boolean isFirstLoc = true;
     private AutoCompleteTextView mStrartNodeView;
@@ -78,11 +77,23 @@ public class TransitRoutePlanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transit_route);
 
+        location = getIntent().getParcelableExtra("location");
+
+        registerLocationReceiver(this);
         // 初始化地图
-        mMapView = findViewById(R.id.map);
+        initView();
+        initMapView();
+
         mBaidumap = mMapView.getMap();
+        setMapStatus();
+        mBaidumap.setViewPadding(20, 0, 0, 20);
+
+        MyLocationConfiguration config = new MyLocationConfiguration(
+                MyLocationConfiguration.LocationMode.NORMAL, true, null);
+        mBaidumap.setMyLocationConfiguration(config);
         mBaidumap.setMyLocationEnabled(true);
-        mBaidumap.setCompassEnable(true);
+        mBaidumap.setCompassEnable(true); // 设置指南针是否显示
+//        mBaidumap.setCompassPosition(new Point(1500,500));
 
         // 地图点击事件处理
         mBaidumap.setOnMapClickListener(this);
@@ -90,15 +101,11 @@ public class TransitRoutePlanActivity extends AppCompatActivity
         mSearch = RoutePlanSearch.newInstance();
         mSearch.setOnGetRoutePlanResultListener(this);
 
-        registerLocationReceiver(this);
-        initMapView();
-        initView();
     }
 
     private void initMapView() {
-        mMapView.showZoomControls(false);
-        mMapView.showScaleControl(false);
-        mBaidumap.setViewPadding(20, 0, 0, 20);
+        mMapView.showZoomControls(true); // 设置是否显示比例尺控件
+        mMapView.showScaleControl(true); // 设置是否显示缩放控件
     }
 
     private void initRouteOverViewData() {
@@ -110,6 +117,7 @@ public class TransitRoutePlanActivity extends AppCompatActivity
     }
 
     private void initView() {
+        mMapView = findViewById(R.id.map);
         // 路线概览卡片
         mBottomOverviewCard = findViewById(R.id.rooter_search);
         mETAText = findViewById(R.id.eta_text);
@@ -144,6 +152,15 @@ public class TransitRoutePlanActivity extends AppCompatActivity
 
     }
 
+    public void setMapStatus() {
+        if (isFirstLoc) {
+            isFirstLoc = false;
+            MapStatus.Builder builder = new MapStatus.Builder();
+            builder.target(location).zoom(18.0f);
+            mBaidumap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
+        }
+    }
+
     public void registerLocationReceiver(Context context) {
         // 创建广播接收器
         mLocationDataReceiver = new BroadcastReceiver() {
@@ -158,18 +175,10 @@ public class TransitRoutePlanActivity extends AppCompatActivity
 
                     // 在这里处理定位信息
                     locData = new MyLocationData.Builder()
-                            .accuracy(radius)
-                            // 此处设置开发者获取到的方向信息，顺时针0-360
+                            .accuracy(radius) // 此处设置开发者获取到的方向信息，顺时针0-360
                             .direction(direction).latitude(latitude).longitude(longitude).build();
                     mBaidumap.setMyLocationData(locData);
 
-                    if (isFirstLoc) {
-                        isFirstLoc = false;
-                        LatLng ll = new LatLng(latitude, longitude);
-                        MapStatus.Builder builder = new MapStatus.Builder();
-                        builder.target(ll).zoom(18.0f);
-                        mBaidumap.animateMapStatus(MapStatusUpdateFactory.newMapStatus(builder.build()));
-                    }
                 }
             }
         };
@@ -263,6 +272,8 @@ public class TransitRoutePlanActivity extends AppCompatActivity
                 mRouteLines.clear();
             }
             mRouteLines = result.getRouteLines();
+
+//            Log.d("routeline", new Gson().toJson(result.getRouteLines()));
             initRouteOverViewData();
             mRouteLineListAdapter.notifyDataSetChanged();
 
@@ -338,6 +349,7 @@ public class TransitRoutePlanActivity extends AppCompatActivity
         }
         mBaidumap.clear();
         mMapView.onDestroy();
+        mBaidumap.setMyLocationEnabled(false);
         unregisterLocationReceiver(this);
     }
 

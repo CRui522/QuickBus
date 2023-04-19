@@ -1,36 +1,58 @@
 package com.quick.quickbus.model;
 
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.utils.DistanceUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class BusStop {
-    private String name;
-    private String uid;
+    private final String name;
+    private final LatLng latLng;
+    private final String uid;
     private int distance;
-    private String address;
-    private List<String> busRoutes;
+    private final String address;
+    private final String city;
+    private final List<BusLine> busLines = new ArrayList<>();
     private boolean isExpanded;
 
-    public BusStop(String name, String uid, int distance, String address) {
-        this.name = name;
-        this.uid = uid;
-        this.distance = distance;
-        this.address = address;
+    public BusStop(PoiInfo poi) {
+        // 获取公交站点信息
+        this.name = poi.name; // 公交站点名称
+        this.uid = poi.uid;
+        this.address = poi.address; // 所有线路名称
+        this.latLng = poi.location; // 公交站点位置
+        this.city = poi.city;
+    }
+
+    // 计算地球上两点之间的距离，单位为千米
+    public void setDistance(LatLng myLocation) {
+        distance = (int) DistanceUtil.getDistance(myLocation, latLng);
+    }
+
+    public LatLng getLatLng() {
+        return latLng;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public List<BusLine> getBusLines() {
+        return busLines;
+    }
+
+    public void setBusLines(BusLine busLines) {
+        this.busLines.add(busLines);
+    }
+
     public int getDistance() {
         return distance;
-    }
-
-    public List<String> getBusRoutes() {
-        return busRoutes;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getAddress() {
@@ -45,15 +67,11 @@ public class BusStop {
         return isExpanded;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public String getUid() {
+        return uid;
     }
 
-    public void setBusRoutes(List<String> busRoutes) {
-        this.busRoutes = busRoutes;
-    }
-
-    public String[] getSubItems() {
+    public String[] getLineNames() {
         return address.split(";");
     }
 }

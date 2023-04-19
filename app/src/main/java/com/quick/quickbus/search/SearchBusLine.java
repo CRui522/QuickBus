@@ -1,48 +1,60 @@
 package com.quick.quickbus.search;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.mapapi.search.busline.BusLineResult;
 import com.baidu.mapapi.search.busline.BusLineSearch;
 import com.baidu.mapapi.search.busline.BusLineSearchOption;
 import com.baidu.mapapi.search.core.SearchResult;
-import com.google.gson.Gson;
+import com.quick.quickbus.adapter.MyListAdapter;
+import com.quick.quickbus.model.BusLine;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class SearchBusLine {
+    private final BusLineSearch mBusLineSearch;
+    private List<BusLine> busLines;
 
-    private final String uid;
-    private final Context mContext;
-    private final String city;
-
-    public SearchBusLine(Context mContext, String uid, String city) {
-        this.city = city;
-        this.mContext = mContext;
-        this.uid = uid;
-    }
-
-    public void search() {
-        // 创建公交线路查询实例
-        BusLineSearch busLineSearch = BusLineSearch.newInstance();
-
-        // 设置公交线路查询监听器
-        busLineSearch.setOnGetBusLineSearchResultListener(busLineResult -> {
-            Log.i("stations", uid + city);
-            if (busLineResult == null || busLineResult.error != SearchResult.ERRORNO.NO_ERROR) {
-                // 查询失败处理
-                Toast.makeText(mContext, "搜索失败", Toast.LENGTH_SHORT).show();
+    // 构造函数
+    public SearchBusLine(Context context, MyListAdapter myListAdapter, int position) {
+        mBusLineSearch = BusLineSearch.newInstance();
+        // 查询结果回调函数
+        mBusLineSearch.setOnGetBusLineSearchResultListener(result -> {
+            if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
+                // 查询失败
+                Toast.makeText(context, "搜索失败", Toast.LENGTH_SHORT).show();
                 return;
             }
-            // TODO: 在此处处理获取到的公交路线信息
-            List<BusLineResult.BusStation> stations = busLineResult.getStations();
-            Log.i("stations", new Gson().toJson(stations));
+            // 处理查询结果
+            Date startTime = result.getStartTime();
+            Date endTime = result.getEndTime();
+            String uid = result.getUid();
+            List<BusLineResult.BusStation> stations = result.getStations();
+            List<BusLineResult.BusStep> steps = result.getSteps();
+            for (BusLine line : busLines) {
+                if (Objects.equals(line.getUid(), uid)) {
+                    line.setStartTime(startTime);
+                    line.setEndTime(endTime);
+                    line.setBusStationList(stations);
+                    line.setBusStepList(steps);
+                    myListAdapter.updateItem(position, line);
+                }
+            }
+            //listener.onDataReceived(busLine);
         });
-        busLineSearch.searchBusLine(new BusLineSearchOption()
-                .uid(uid)
-                .city(city));
-
     }
+
+    // 查询指定城市和公交线路uid的公交线路信息
+    public void searchBusLine(List<BusLine> lines) {
+        busLines = lines;
+        for (BusLine line : lines) {
+            mBusLineSearch.searchBusLine(new BusLineSearchOption()
+                    .city(line.getCity())
+                    .uid(line.getUid()));
+        }
+    }
+
 }

@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_marginTop="10dp">
 
     <TextView
-        android:id="@+id/bus_line_name"
+        android:id="@+id/line_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:text="615路"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/bus_line_direction"
+        android:id="@+id/line"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:layout_below="@+id/line_name"
+        android:text="..."
+        android:textSize="12sp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/line_start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="..."
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/line_end_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line_start_time"
+        android:layout_alignParentEnd="true"
+        android:text="..."
+        android:textSize="12sp" />
+
+</RelativeLayout>

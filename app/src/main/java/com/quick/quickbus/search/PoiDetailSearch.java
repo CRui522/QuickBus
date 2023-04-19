@@ -16,12 +16,12 @@ import java.util.List;
 
 public class PoiDetailSearch {
 
-    private final String uids;
+    private final String uid;
     private final Context context;
     private PoiSearch mPoiSearch;
 
-    public PoiDetailSearch(Context context, String uids) {
-        this.uids = uids;
+    public PoiDetailSearch(Context context, String uid) {
+        this.uid = uid;
         this.context = context;
     }
 
@@ -40,8 +40,7 @@ public class PoiDetailSearch {
                 Log.i("detail", new Gson().toJson(pois));
             }
         });
-        mPoiSearch.searchPoiDetail(new PoiDetailSearchOption()
-                .poiUids(uids));
+        mPoiSearch.searchPoiDetail(new PoiDetailSearchOption().poiUids(uid));
     }
 
 }

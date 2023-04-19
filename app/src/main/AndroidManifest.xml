@@ -18,6 +18,10 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-feature android:name="android.hardware.sensor.compass" />
+
 
     <application
         android:name=".BusApplication"
@@ -33,7 +37,7 @@
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="5H2FNRDRSIr9LwSexjkQhGZWmSVNVYPj" />
+            android:value="key" />
 
         <activity
             android:name=".activity.MainActivity"
@@ -54,14 +58,19 @@
             android:name=".activity.TransitRoutePlanActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/demo_name_transit_route_plan"
-            android:screenOrientation="portrait"
+            android:screenOrientation="fullSensor"
             android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".activity.RouteDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/demo_name_route_plan_detail"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".activity.MapActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="fullSensor" />
 
         <service
             android:name="com.baidu.location.f"

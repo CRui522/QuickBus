@@ -38,13 +38,31 @@
         android:textColor="#333333"
         android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchButton"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="10dp"
+        android:ellipsize="marquee"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
+        android:textColor="#333333"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_location_address" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/nearbyRoutesTitleTextView"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="16dp">
         <!-- 路线列表 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/routeRecyclerView"
@@ -56,6 +74,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_scrollFlags="scroll|enterAlways" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </RelativeLayout>
 
 

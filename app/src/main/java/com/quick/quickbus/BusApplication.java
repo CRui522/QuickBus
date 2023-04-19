@@ -6,6 +6,8 @@ import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 
 public class BusApplication extends Application {
+    public static String host = "http://192.168.0.108:3000";
+
     @Override
     public void onCreate() {
         super.onCreate();

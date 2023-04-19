@@ -6,24 +6,17 @@
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingTop="16dp"
-        android:paddingRight="16dp"
-        android:paddingBottom="16dp">
+        android:padding="14dp">
 
         <LinearLayout
             android:id="@+id/bus_station"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -31,10 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="18sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <View
-                android:layout_width="12dp"
+                android:layout_width="11dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="5dp"
@@ -45,8 +39,9 @@
                 android:id="@+id/tv_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -62,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/sub_item_list"
+            android:layout_marginTop="5dp"
             android:gravity="bottom|right"
             android:orientation="horizontal"
             tools:ignore="RtlHardcoded,UseCompoundDrawables">
@@ -75,13 +71,22 @@
                 android:textSize="12sp"
                 android:visibility="visible" />
 
+            <TextView
+                android:id="@+id/parent_arrow_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="查看更多"
+                android:textSize="12sp" />
+
             <ImageView
                 android:id="@+id/parent_arrow_image_view"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
                 android:layout_gravity="right|bottom"
-                android:src="@drawable/ic_arrow_down"
                 android:contentDescription="@string/expand_or_close"
+                android:padding="0dp"
+                android:src="@drawable/ic_arrow_down"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
 
